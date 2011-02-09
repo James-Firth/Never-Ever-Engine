@@ -12,7 +12,7 @@ public class Main
 		stats = genStats();
 		Scanner Input = new Scanner(System.in);
 		player = mainMenu.Menu(); //New or Load screen
-        Test();
+        RoomHandling.startGame();
 		System.out.println("END OF THE GAME SO FAR");
 		
 		

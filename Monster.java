@@ -30,6 +30,10 @@ class Monster extends Character
 		defChance = 0;
 		specChance = 0; 
 		}
+		public String getName()
+		{
+			return name;
+		}
 		public String toString()
 		{
 			return name;
