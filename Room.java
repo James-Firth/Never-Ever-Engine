@@ -1,5 +1,6 @@
 class Room
 {
+	public static int count=0;
 	private String Description;
 	private int monChance;
 	private Monster roomMon;
@@ -12,7 +13,10 @@ class Room
 		monChance = 0;
 		roomMon = null;
 		itemChance = item;
-		connections = null;
+		for(int i=0; i < connections.length; i++)
+		{
+		connections[i] = null;
+		}
 		
 	}
 	
@@ -28,6 +32,10 @@ class Room
 	
 	/****************************************************/
 
+	public Room[] getConnects()
+	{
+		return connections;
+	}
 	public String getDesc()
 	{
 		return Description;
@@ -51,7 +59,11 @@ class Room
 	{
 		return 0;
 	}
-	
+	/***********SETTERS**********/
+	public void setConnect(int to,Room roomTo)
+	{
+		connections[to] = roomTo;
+	}
 	public String toString()
 	{
 		return "I am a room";
