@@ -29,9 +29,14 @@ public class Movement
 		if(input.equals("north") || input.equals("n"))
 		{
 			//Since you look it creates a new room (Boring)
-			Room nRoom = new Room("described",0,0,1,room);
-			room.setConnect(0, nRoom); //It connects this new room to the north of the current one
-			System.out.println("To the north you see "+nRoom.getDesc()); //Then it tells you what is seen
+			try
+			{
+				System.out.println("To the north you see "+ room.getConnects()[0].getDesc()); //Then it tells you what is seen
+			}catch(NullPointerException npe){
+				Room nRoom = new Room("described",0,0,1,room);
+				room.setConnect(0, nRoom); //It connects this new room to the north of the current one
+				System.out.println("To the north you see "+nRoom.getDesc()); //Then it tells you what is seen
+			}
 		}
 		if(input.equals("go north") || input.equals("go n"))
 		{
@@ -42,8 +47,14 @@ public class Movement
 		if(input.equals("south") || input.equals("s"))
 		{
 			//go south code
-			System.out.println("S: "+ room.getConnects()[1].getDesc());
-			move(1,room);
+			try
+			{
+				System.out.println("To the South is: "+room.getConnects()[1].getDesc());
+			}catch(NullPointerException npe){
+			Room sRoom = new Room ("Oh look a new room",0,0,0,room);
+			room.setConnect(1,sRoom);
+			System.out.println("To the South is " + sRoom.getDesc());
+			}
 		}
 		if(input.equals("go south") || input.equals("go s"))
 		{
@@ -54,16 +65,39 @@ public class Movement
 		if(input.equals("east") || input.equals("e"))
 		{
 			//go east code
-			System.out.println("E: "+"Whatever's East");
+			try
+			{
+			System.out.println("To the East is"+room.getConnects()[2].getDesc());
+			}catch(NullPointerException npe){
+			Room eRoom = new Room("SHINY",0,0,3,room);
+			System.out.println("To the East is " + eRoom.getDesc());
+			room.setConnect(2,eRoom);
+			}
+		}
+		if(input.equals("go east") || input.equals("go e"))
+		{
 			move(2,room);
 		}
 		
+		
+		/***********WEST********/
 		if(input.equals("west") || input.equals("w"))
 		{
 			//go west code
-			move(3,room);
-			System.out.println("W: "+"Whatever's West");
+			try
+			{
+				System.out.println("To the West is " + room.getConnects()[3].getDesc());
+			}catch(NullPointerException npe){
+			Room wRoom = new Room("DOOOM",0,0,2,room);
+			System.out.println("To the West is " + wRoom.getDesc());
+			room.setConnect(3,wRoom);
+			}
 		}
+		if(input.equals("go west") || input.equals("go w"))
+		{
+			move(3,room);
+		}
+		
 		enterRoom(room); //loops if nothing is selected
 		
 	}
@@ -76,14 +110,14 @@ public class Movement
 			System.out.println("You went North");
 			System.out.println("Room to the north" + nRoom[0]);
 			
-			try
+			try //checks if a room to the north exists. If not..
 			{
 				nRoom[0].equals(null);
 			}catch(NullPointerException npe)
-			{
+			{ ///... It'll make a new room for you and auto-connect them.
 				nRoom[0] = RoomHandling.generateRoom(2,curRoom);
 			}
-			enterRoom(nRoom[0]);
+			enterRoom(nRoom[0]); //Then you enter this new room!
 		}
 		
 		if(to==1)
