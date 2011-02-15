@@ -88,5 +88,16 @@ public class mainMenu
 		
 		return stats;
 	}
+	
+	public static void help()
+	{
+		System.out.println("++HELP FILE+++");
+		System.out.println("Commands:");
+		System.out.println("go [n,s,e,w] <- go in the direction picked");
+		System.out.println("go [north,south,east,west] <- Same as above");
+		System.out.println("[n,e,s,w,north,south,east,west] <- Look in the direction specified.");
+		System.out.println("help <- Display this file");
+		System.out.println("++++++++++++++end of help section+++\n");
+	}
 
 }

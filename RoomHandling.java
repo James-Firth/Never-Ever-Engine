@@ -6,15 +6,16 @@ public class RoomHandling
 	public static void startGame()
 	{
 		String about = "You are in appears to be an oubliette but emerge through the hole in a large cavern."
-							+"\nThere are exits all around. Where do you go?";
+							+"\nThere are exits all around.";
 		Room start = new Room(about,2);
+		mainMenu.help();
 		Movement.enterRoom(start);
 	}
 	
 	public static Room generateRoom(int from, Room fromR)
 	{
 		Room.count++;
-		Room theRoom = new Room(String.valueOf(Room.count),0,0,from,fromR);
+		Room theRoom = new Room(String.valueOf(Room.count),randomizeMonsters(),0,from,fromR);
 		return theRoom;
 	}
 	
@@ -26,8 +27,9 @@ public class RoomHandling
 	{
 		
 	}
-	public static void randomizeMonsters()
+	public static int randomizeMonsters()
 	{
+		return (int)Math.random()*100;
 		
 	}
 	

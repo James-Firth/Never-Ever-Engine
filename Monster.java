@@ -4,6 +4,7 @@ class Monster extends Character
 		private int attChance;
 		private int defChance;
 		private int specChance;
+		
 		Monster(String mName, int HP, int mDmg, int mDef, int att, int dchance, int speC)
 		{
 			name = mName;
@@ -17,6 +18,7 @@ class Monster extends Character
 		defChance = dchance;
 		specChance = speC;
 		}
+		
 		Monster()
 		{
 		name = "GLITCH";

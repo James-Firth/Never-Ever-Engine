@@ -1,16 +1,29 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 public class Main
 {
 	public static Player player;
+	public static boolean debug;
 	public static void main(String[] args)
 	{	
 		//Initialize variables
 		int[] stats = new int[3];
 		stats = genStats();
 		Scanner Input = new Scanner(System.in);
+		debug = false; //defaults
+		try
+		{
+		if(args[0].equals("--debug")) //enter debugmode
+			debug=true;
+		System.out.println("Running game in debugger mode");
+		
+		}catch(ArrayIndexOutOfBoundsException oob)
+		{
+			System.out.println("Starting game normally...");
+		}
 		player = mainMenu.Menu(); //New or Load screen
         RoomHandling.startGame();
 		System.out.println("END OF THE GAME SO FAR");
