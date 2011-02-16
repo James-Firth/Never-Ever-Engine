@@ -13,19 +13,47 @@ public class Main
 		int[] stats = new int[3];
 		stats = genStats();
 		Scanner Input = new Scanner(System.in);
+		int in =0;
 		debug = false; //defaults
 		try
 		{
-		if(args[0].equals("--debug")) //enter debugmode
+		if(args[0].equals("--debug"))//enter debugmode
 			debug=true;
-		System.out.println("Running game in debugger mode");
-		
+			System.out.println("Running game in debugger mode");
 		}catch(ArrayIndexOutOfBoundsException oob)
 		{
 			System.out.println("Starting game normally...");
 		}
+		
 		player = mainMenu.Menu(); //New or Load screen
+		
+		if(debug==true)
+		{
+			while(in==0)
+			{
+				System.out.println("1) RoomHandling");
+				System.out.println("2) Combat Testing");
+				in = Input.nextInt();
+				if(in == 1)
+					RoomHandling.startGame();
+				if(in == 2)
+				{
+					//Monster(String mName, int HP, int mStr, int mDef, int mHit, int mCon, int mDex, int att, int dchance, int speC)
+					Monster kobold = new Monster("Kobold",1000,10,10,10,10,10,50,50,10);
+					System.out.println(kobold.toString());
+					//Monster is created properly
+					String about = "You are in appears to be an oubliette but emerge through the hole in a large cavern."
+						+"\nThere are exits all around.";
+					Room start = new Room(about,2,kobold);
+					//Monster doesn't seem to be assigned to room properly.
+					Combat.comMenu(start);
+				}
+			}
+		}
+		else
+		{
         RoomHandling.startGame();
+		}
 		System.out.println("END OF THE GAME SO FAR");
 		
 		

@@ -10,7 +10,7 @@ public class mainMenu
         String name;
 		int input;
 		Player decoy = new Player();
-		Player player;
+		Player player=null;
 		boolean keep=false;
 		Scanner inMenu = new Scanner(System.in);
 		
@@ -54,9 +54,7 @@ public class mainMenu
             {
             System.out.println("ERROR in selection");
             }
-            
             return decoy;
-
 	}
 	
 	//Generates a character
@@ -67,13 +65,21 @@ public class mainMenu
 		String name;
 		int[] stats = genStats();
 		Scanner in = new Scanner(System.in);
-		
+		Player player = null;
 		
 		System.out.println("\n");
         System.out.println("Enter your character name:");
         name = in.nextLine();
-
-		Player player = new Player(name, stats);
+        
+        if (name.equals(".."))
+        {
+        	System.out.println("Returning to menu.");
+        	mainMenu.Menu();
+        }
+        else
+        {
+		 player = new Player(name, stats);
+        }
 		
 		return player;
 	}
@@ -82,7 +88,7 @@ public class mainMenu
 	//Generates stats, duh
 	public static int[] genStats()
 	{
-		int[] stats = new int[3];
+		int[] stats = new int[5];
 		for(int i=0; i < stats.length; i++)
 	         stats[i] = (int)(Math.random() * (18 - 1 + 1)) + 1;
 		

@@ -8,7 +8,10 @@ public class Movement
 	{
 		Scanner key = new Scanner(System.in);
 		String input;
+		if(room.monInRoom())
+		{
 		String mon = room.getMonster().getName();
+		}
 		
 		//Prints out the players options
 		System.out.println("Description: " + room.getDesc());
@@ -23,18 +26,20 @@ public class Movement
 			System.out.println("To the West: " + room.getConnects()[3]);
 		}
 		//Check if a monster appears each time they enter the room
+		/*
 		System.out.println((int)(Math.random()*100));
 		System.out.println(room.getMonChance());
 		System.out.println(room.getMonster());
 		if((int)(Math.random()*100) > room.getMonChance());
 		{
 			System.out.println("HI");
-			Monster tempMon =new Monster("kobold",10,3,4,50,50,0); 
+			Monster tempMon =new Monster("kobold",10,3,4,50,50,0,0,0,0); //PLACEHOLDER REDO!
 			room.killMon();
 			room.addMonster(tempMon);
 		}
+		*/
 		//Displays info if there's a monster or not
-		if(mon.equals("GLITCH"))
+		if(!room.monInRoom())
 		{
 			System.out.println("Luckily there are no monsters here\n");
 		}

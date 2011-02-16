@@ -43,10 +43,11 @@ public class FileOperations
         Player decoy = new Player();
         String strFile;
         String charName;
-        int[] stats = new int[6];
-        
+        int[] stats = new int[9];
+        String cmd="";
         System.out.println("Enter your old character's name:");
         strFile = (Input.nextLine());
+        cmd = strFile.toLowerCase();
         strFile = strFile.toLowerCase() + ".stats";
         
          //Reads File
@@ -60,10 +61,10 @@ public class FileOperations
         	 Scanner Read = new Scanner(file);
              	int i;
              	charName = Read.nextLine();
-             	for(i=1; i < 6; i++)
+             	for(i=1; i < 9; i++)
              	{
              		stats[i]= Read.nextInt();
-             		System.out.println(stats[i]); //debug
+             		//System.out.println(stats[i]); //debug
              	}
              	player = new Player(charName, stats, "Load");
              	System.out.println(player.toString()); //test
@@ -78,6 +79,11 @@ public class FileOperations
          
 
         }
+        else if(cmd.equals(".."))
+        {
+        	System.out.println("Returning to menu.");
+        	mainMenu.Menu();
+        }
         else
         {
            System.out.println("That character does not exist");
@@ -86,4 +92,5 @@ public class FileOperations
 //        Story.Start();
         return decoy;
    }
+ 
 }
