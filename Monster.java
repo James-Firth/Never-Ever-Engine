@@ -17,9 +17,9 @@ class Monster extends Character
 			hit=mHit;
 			dex=mDex;
 			def = mDef;
-		attChance = att;
-		defChance = dchance;
-		specChance = speC;
+			attChance = att;
+			defChance = dchance;
+			specChance = speC;
 		}
 		
 		Monster()
@@ -38,6 +38,7 @@ class Monster extends Character
 		defChance = 0;
 		specChance = 0; 
 		}
+		
 		/******GETTERS***********/
 		public String getName()
 		{
@@ -101,6 +102,7 @@ class Monster extends Character
 			if (toDo <= 0)
 			{
 				//stays the same
+				toDo=0;
 			}
 			else if(toDo > 0)
 			{

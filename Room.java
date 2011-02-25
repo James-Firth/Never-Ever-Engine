@@ -52,7 +52,8 @@ class Room
 	{
 		Description = about;
 		monChance = mons;
-		roomMon = null;
+		monInRoom=false;
+		genMon();
 		this.itemChance = itemchance;
 		
 		//Sets coordinates <- CRUDELY
@@ -121,8 +122,30 @@ class Room
 	}
 	
 	
-	
-	/****************************************************/
+	/********OTHER STUFF************/
+	public void genMon()
+	{
+		int ran = (int)(Math.random()*100);
+		if(Main.debug)
+		{
+			System.out.println("MONSTER CHANCE:"+ran+":"+monChance);
+		}
+		
+		if(!monInRoom)
+		{
+			if(ran <= monChance)
+			{
+				Monster mon = RoomHandling.randomizeMonsters();
+				addMonster(mon);
+			}
+			else
+			{
+				roomMon = null;
+			}
+		}
+
+	}
+	/*****************GETTERS*************************/
 
 	public Room[] getConnects()
 	{
@@ -167,6 +190,7 @@ class Room
 	{
 		return monInRoom;
 	}
+	
 	/***********SETTERS**********/
 	public void setConnect(int to,Room roomTo)
 	{
@@ -178,12 +202,14 @@ class Room
 	}
 	public void addMonster(Monster mon)
 	{
-		
+		monInRoom = true;
 		roomMon = mon;
 	}
 	public void killMon()
 	{
 		roomMon = null;
+		monInRoom = false;
+		if(Main.debug)
 		System.out.println("Killed monster");
 	}
 	

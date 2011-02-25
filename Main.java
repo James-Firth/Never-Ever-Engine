@@ -39,8 +39,8 @@ public class Main
 				if(in == 2)
 				{
 					//Monster(String mName, int HP, int mStr, int mDef, int mHit, int mCon, int mDex, int att, int dchance, int speC)
-					Monster kobold = new Monster("Kobold",1000,10,10,10,10,10,50,50,10);
-					System.out.println(kobold.toString());
+					Monster kobold = new Monster("Kobold",50,10,10,10,10,10,50,50,10);
+					
 					//Monster is created properly
 					String about = "You are in appears to be an oubliette but emerge through the hole in a large cavern."
 						+"\nThere are exits all around.";

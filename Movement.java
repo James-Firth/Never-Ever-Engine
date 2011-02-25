@@ -8,9 +8,13 @@ public class Movement
 	{
 		Scanner key = new Scanner(System.in);
 		String input;
+		if(!room.monInRoom())
+		{
+			room.genMon();
+		}
 		if(room.monInRoom())
 		{
-		String mon = room.getMonster().getName();
+			String mon = room.getMonster().getName();
 		}
 		
 		//Prints out the players options
@@ -24,6 +28,7 @@ public class Movement
 			System.out.println("To the South: " + room.getConnects()[1]);
 			System.out.println("To the East: " + room.getConnects()[2]);
 			System.out.println("To the West: " + room.getConnects()[3]);
+			
 		}
 		//Check if a monster appears each time they enter the room
 		/*
@@ -53,10 +58,19 @@ public class Movement
 		input = key.nextLine();
 		input = input.toLowerCase();
 		//Takes input and checks if it matches any of the options
-		if(input.equals("help"))
+		if(input.equals("help") || input.equals("h"))
 				{
 					mainMenu.help();
 				}
+		
+		if(input.equals("fight"))
+		{
+			Combat.comMenu(room);
+		}
+		if(room.monInRoom() && room.getMonster().isAlive())
+		{
+			Combat.monAttack(room.getMonster());
+		}
 		/***************NORTH*************/
 		if(input.equals("north") || input.equals("n"))
 		{
@@ -67,7 +81,7 @@ public class Movement
 				System.out.println("To the north you see "+ room.getConnects()[0].getDesc()+" at:("+room.getConnects()[0].getHor()+","+room.getConnects()[0].getVert()+")"); //Then it tells you what is seen
 				System.out.println("To the north you see " + room.getConnects()[0].getDesc());
 			}catch(NullPointerException npe){
-				Room nRoom = new Room("described",50,0,1,room);
+				Room nRoom = new Room("described",100,0,1,room);
 				room.setConnect(0, nRoom); //It connects this new room to the north of the current one
 				if(Main.debug==true)
 				System.out.println("To the north you see "+nRoom.getDesc()+" at:("+room.getConnects()[0].getHor()+","+room.getConnects()[0].getVert()+")"); //Then it tells you what is seen
@@ -189,7 +203,7 @@ public class Movement
 			}catch(NullPointerException npe)
 			{ ///... It'll make a new room for you and auto-connect them.
 				//eRoom[2] = RoomHandling.generateRoom(2,curRoom);
-				eRoom[2] = new Room("An East Room",0,0,3,curRoom);
+				eRoom[2] = RoomHandling.generateRoom(3, curRoom);
 			}
 			enterRoom(eRoom[2]); //Then you enter this new room!
 		}
@@ -204,7 +218,7 @@ public class Movement
 			}catch(NullPointerException npe)
 			{ ///... It'll make a new room for you and auto-connect them.
 				//eRoom[2] = RoomHandling.generateRoom(2,curRoom);
-				wRoom[3] = new Room("A West Room",0,0,2,curRoom);
+				wRoom[3] = RoomHandling.generateRoom(2, curRoom);
 			}
 			enterRoom(wRoom[3]); //Then you enter this new room!
 		}

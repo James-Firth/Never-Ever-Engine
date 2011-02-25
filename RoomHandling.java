@@ -15,22 +15,43 @@ public class RoomHandling
 	public static Room generateRoom(int from, Room fromR)
 	{
 		Room.count++;
-		Room theRoom = new Room(String.valueOf(Room.count),randomizeMonsters(),0,from,fromR);
+		Room theRoom = new Room(randomizeDescription(),randomNum(50),0,from,fromR);
 		return theRoom;
 	}
 	
-	public static void randomizeDescription()
+	public static String randomizeDescription()
 	{
-		
+		return "Some Room";
 	}
 	public static void randomizeItems()
 	{
 		
 	}
-	public static int randomizeMonsters()
+	
+	//Monster(String mName, int HP, int mStr, int mDef, int mHit, int mCon, int mDex, int att, int dchance, int speC)
+	public static Monster randomizeMonsters()
 	{
-		return (int)Math.random()*100;
+		int which = (int)(Math.random()*12+1);
+			Monster mon;
+		if(which >= 10)
+			mon = new Monster("Orc",randomNum(20),randomNum(20),randomNum(20),randomNum(20),randomNum(11),randomNum(8),randomNum(50),randomNum(50),randomNum(0));
+		if(which == 9)
+		{
+		mon = new Monster("Dragon",120,randomNum(50),randomNum(50),randomNum(50),randomNum(20),randomNum(20),randomNum(50),randomNum(50),randomNum(0));
+		}
+		else
+		{
+			mon = new Monster("Kobold",randomNum(10),randomNum(10),randomNum(10),randomNum(10),randomNum(5),randomNum(11),randomNum(50),randomNum(50),randomNum(0));
+		}
 		
+		return mon;
+		
+	}
+	
+	public static int randomNum(int max)
+	{
+		int num = (int)(Math.random()*max);
+		return num;
 	}
 	
 	public static String[] read(String filetype)

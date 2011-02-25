@@ -8,8 +8,8 @@ public class Combat
 		int input=0;
 		Monster mon = comRoom.getMonster();
 		
-		while(mon.isAlive() && Main.player.isAlive())
-		{
+		//while(mon.isAlive() && Main.player.isAlive())
+		//{
 			System.out.println("There's a " + mon.getName()+ "(HP:"+mon.printHP()+") in the room! What do you do?");
 			System.out.println("1) Attack the monster!");
 			System.out.println("2) Defend against the monter");
@@ -19,7 +19,10 @@ public class Combat
 			if(input ==1)
 			{
 				attack(mon);
-				monTurn(mon);
+				if(mon.isAlive())
+				{
+					monTurn(mon);
+				}
 			}
 			if(input==2)
 			{
@@ -35,10 +38,20 @@ public class Combat
 			}
 			if(input==3)
 			{
+				System.out.println("You run away!!!!");
+				Movement.enterRoom(comRoom);
 				
 			}
-		}
-		System.out.println("You killed the monster!");
+		//}
+			if(!mon.isAlive())
+			{
+				System.out.println("You killed the monster!");
+				comRoom.killMon();
+			}
+			if(mon.isAlive())
+			{
+			comMenu(comRoom);
+			}
 	}
 	
 	public static void monTurn(Monster mon)
@@ -66,7 +79,9 @@ public class Combat
 	public static void monAttack(Monster mon)
 	{
 		System.out.println("The "+mon.getName()+" attacks you!");
-		if(mon.hit() >= (Main.player.dodge()))
+		int mhit = mon.hit();
+		int pDodge = Main.player.dodge();
+		if(mhit >= pDodge)
 		{
 			int dmg = Main.player.isHit(mon.getStr());
 			System.out.println("It hits for "+dmg+" damage!");
@@ -80,10 +95,26 @@ public class Combat
 	public static void attack(Monster mon)
 	{
 		System.out.println("You attack the "+mon.getName()+"!");
-		if(Main.player.hit() >= mon.dodge())
+		int pHit = Main.player.hit();
+		int mDodge = mon.dodge();
+		if(Main.debug)
 		{
-			int dmg = mon.isHit(Main.player.getDmg());
+			System.out.println("Player hit "+pHit+" vs Dodge:"+mDodge);
+		}
+		if(pHit >= mDodge)
+		{
+			int dmg;
+			if(pHit >= 2*mDodge)
+			{
+				dmg = mon.isHit(2*Main.player.getDmg());
+				System.out.println("~CRICITCAL!~");
+			}
+			else
+			{
+				dmg = mon.isHit(Main.player.getDmg());
+			}
 			System.out.println("Yout hit it for "+dmg+" points of damage!");
+
 		}
 		else
 		{
