@@ -15,7 +15,7 @@ help                                Display help file
 
 Contact
 =======
-Please email me any glitched output/errors (or screenshots if you're not sure how to caputre the output) to bugreports@gmail.com
+Please email me any glitched output/errors (or screenshots if you're not sure how to caputre the output) to bugreports@james-firth.com
 
 Thanks so much for helping test this!
 
